@@ -3,6 +3,9 @@
 # dependencies
 node_modules/
 
+# Config files with sensitive data
+config.js
+
 # Expo
 .expo/
 dist/
