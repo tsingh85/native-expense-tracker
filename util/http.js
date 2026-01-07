@@ -1,8 +1,13 @@
 import axios from 'axios';
 import { BACKEND_URL } from '../config.js';
 
-export function storeExpense(expenseData) {
-  axios.post(`${BACKEND_URL}/expenses.json`, expenseData);
+export async function storeExpense(expenseData) {
+  const response = await axios.post(
+    `${BACKEND_URL}/expenses.json`,
+    expenseData
+  );
+  const id = response.data.name;
+  return id;
 }
 
 export async function fetchExpenses() {
@@ -18,4 +23,12 @@ export async function fetchExpenses() {
     expenses.push(expenseObj);
   }
   return expenses;
+}
+
+export function updateExpense(id, expenseData) {
+  return axios.put(`${BACKEND_URL}/expenses/${id}.json`, expenseData);
+}
+
+export function deleteExpense(id) {
+  return axios.delete(`${BACKEND_URL}/expenses/${id}.json`);
 }
